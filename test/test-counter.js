@@ -9,14 +9,14 @@ contract("CounterContract", (accounts) => {
   });
 
   it("should have a count of zero", async () => {
-    const count = await instance.methods.count().call();
+    const count = await instance.methods.getCount().call();
 
     assert.equal(count, 0);
   });
 
   it("should increment by one", async () => {
     await instance.methods.increment().send();
-    const count = await instance.methods.count().call();
+    const count = await instance.methods.getCount().call();
 
     assert.equal(count, 1);
   })
