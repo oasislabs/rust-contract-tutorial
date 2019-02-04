@@ -17,7 +17,7 @@ trait CounterContract {
     #[constant]
     fn getCount(&mut self) -> U256 {
         debug("Getting count");
-        U256::from_big_endian(&owasm_ethereum::read(&COUNTER_KEY))
+        U256::from(&owasm_ethereum::read(&COUNTER_KEY))
     }
 
     fn increment(&mut self) {
