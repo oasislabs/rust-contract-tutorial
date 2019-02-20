@@ -19,5 +19,5 @@ contract("CounterContract", (accounts) => {
     const count = await instance.methods.getCount().call();
 
     assert.equal(count, 1);
-  })
-})
+  });
+});
