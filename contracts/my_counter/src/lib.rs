@@ -1,4 +1,5 @@
 #![no_std]
+#![feature(int_to_from_bytes)]
 
 extern crate owasm_std;
 
