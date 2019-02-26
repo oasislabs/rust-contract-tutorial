@@ -8,6 +8,7 @@ owasm-ethereum = "0.8"
 owasm-abi = "0.1"
 owasm-abi-derive = "0.1"
 owasm-std = "0.13"
+owasm-debug = "0.1.0"
 
 [lib]
 crate-type = ["cdylib"]

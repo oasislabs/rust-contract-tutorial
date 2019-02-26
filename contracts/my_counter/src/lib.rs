@@ -1,7 +1,9 @@
 #![no_std]
 #![feature(int_to_from_bytes)]
 
+#[macro_use]
 extern crate owasm_std;
+extern crate owasm_debug;
 
 static COUNTER_KEY: H256 = H256([
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -24,5 +26,6 @@ trait CounterContract {
     fn increment(&mut self) {
         let count = self.getCount() + 1;
         owasm_ethereum::set_bytes(&COUNTER_KEY, &count.to_le_bytes());
+        owasm_debug::log(&format!("count = {:?}", count));
     }
 }
