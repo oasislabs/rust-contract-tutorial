@@ -1,28 +1,27 @@
-#![no_std]
-#![feature(int_to_from_bytes)]
+#![allow(non_snake_case)]
 
-extern crate owasm_std;
+use oasis_std::prelude::*;
 
-static COUNTER_KEY: H256 = H256([
+static COUNTER_KEY: [u8; 32] = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-]);
+];
 
-#[owasm_abi_derive::contract]
+#[contract]
 trait CounterContract {
     fn constructor(&mut self) {
         let count: u32 = 0;
-        owasm_ethereum::set_bytes(&COUNTER_KEY, &count.to_le_bytes());
+        set_bytes(&COUNTER_KEY.into(), &count.to_le_bytes()).unwrap();
     }
 
     #[constant]
     fn getCount(&mut self) -> u32 {
-        let mut count_bytes: [u8; 4] = Default::default();
-        count_bytes.copy_from_slice(&owasm_ethereum::get_bytes(&COUNTER_KEY).unwrap());
+        let mut count_bytes = [0u8, 0, 0, 0];
+        count_bytes.copy_from_slice(&get_bytes(&COUNTER_KEY.into()).unwrap());
         u32::from_le_bytes(count_bytes)
     }
 
     fn increment(&mut self) {
         let count = self.getCount() + 1;
-        owasm_ethereum::set_bytes(&COUNTER_KEY, &count.to_le_bytes());
+        set_bytes(&COUNTER_KEY.into(), &count.to_le_bytes()).unwrap();
     }
 }

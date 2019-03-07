@@ -2,18 +2,16 @@
 name = "counter-contract"
 version = "0.1.0"
 authors = ["Oasis Labs Inc. <info@oasislabs.com>"]
+edition = "2018"
 
 [dependencies]
-owasm-ethereum = "0.8"
-owasm-abi = "0.1"
-owasm-abi-derive = "0.1"
-owasm-std = "0.13"
+oasis-std = "0.1"
 
 [lib]
 crate-type = ["cdylib"]
 
 [profile.release]
-panic = "abort"
+incremental = false
 lto = true
 opt-level = "z"
-incremental = false
+panic = "abort"
